@@ -1,0 +1,24 @@
+# Environment Variables (Agar API Key tidak bocor)
+.env
+
+# Virtual environment
+venv
+.venv
+
+# Python cache files
+__pycache__
+*.pyc
+
+# Notebook checkpoint files
+.ipynb_checkpoints
+
+# Streamlit (jika nanti ada cache)
+.streamlit/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
