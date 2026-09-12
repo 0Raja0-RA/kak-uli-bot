@@ -182,4 +182,14 @@ if rangkum_clicked:
 # Input chat utama
 prompt = st.chat_input("Tanya Kak Uli soal tempat nongkrong...")
 if prompt:
+    # Deteksi otomatis area/budget/begadang dari kalimat yang diketik,
+    # supaya tidak wajib isi kolom sidebar dulu untuk hal ini.
+    deteksi = core.ekstrak_preferensi_dari_teks(prompt, st.session_state.cafe_data)
+    if "area" in deteksi:
+        st.session_state.state["area"] = deteksi["area"]
+    if "budget" in deteksi:
+        st.session_state.state["budget"] = deteksi["budget"]
+    if "mode_24jam" in deteksi:
+        st.session_state.state["mode_24jam"] = deteksi["mode_24jam"]
+
     proses_dan_tampilkan(prompt)

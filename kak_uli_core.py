@@ -18,7 +18,7 @@ from groq import Groq
 # ================= KONFIGURASI =================
 
 MODEL_NAME = "qwen/qwen3.8-27b"
-DATASET_PATH = "../data/surabaya_cafes.json"
+DATASET_PATH = "surabaya_cafes.json"
 FOLDER_RIWAYAT = "riwayat_chat"
 FILE_RANGKUMAN = "daftar_nongkrong.txt"
 
@@ -151,6 +151,49 @@ def format_cafe_untuk_prompt(daftar_cafe):
             f"({c.get('gmaps_review_count', 0)} ulasan) | Fasilitas: {fasilitas} | Link: {c.get('gmaps_url', '-')}"
         )
     return "\n".join(baris)
+
+
+# ================= DETEKSI PREFERENSI DARI KALIMAT BEBAS =================
+
+def ekstrak_preferensi_dari_teks(teks, cafe_data):
+    """
+    Coba deteksi otomatis area, budget, dan niat 'begadang' dari kalimat bebas yang
+    diketik user di chat box (bukan cuma dari kolom sidebar). Ini supaya kalimat kayak
+    'aku di Surabaya Pusat, budget 50rb' langsung nge-update state tanpa harus isi
+    kolom sidebar dulu.
+
+    Mengembalikan dict — key hanya diisi kalau memang berhasil terdeteksi, jadi
+    aman untuk cuma di-update ke state yang sudah ada (tidak menimpa dengan None).
+    """
+    hasil = {}
+    teks_lower = teks.lower()
+
+    # Deteksi area: cocokkan ke area unik yang benar-benar ada di dataset,
+    # area dengan nama lebih panjang dicek duluan (biar "Surabaya Barat" tidak
+    # ketiban cocok sebagian sama entri lain yang kebetulan mirip)
+    daftar_area = sorted({c.get("area") for c in cafe_data if c.get("area")}, key=len, reverse=True)
+    for area in daftar_area:
+        if area.lower() in teks_lower:
+            hasil["area"] = area
+            break
+
+    # Deteksi niat begadang
+    if "begadang" in teks_lower:
+        hasil["mode_24jam"] = True
+
+    # Deteksi budget: prioritaskan angka + satuan eksplisit (50rb, 50 ribu, 1jt),
+    # baru fallback ke angka polos setelah kata 'budget'/'bujet'
+    m = re.search(r"(\d+(?:[.,]\d+)?)\s*(rb|ribu|k|jt|juta)\b", teks_lower)
+    if m:
+        angka = float(m.group(1).replace(",", "."))
+        faktor = 1_000_000 if m.group(2) in ("jt", "juta") else 1_000
+        hasil["budget"] = int(angka * faktor)
+    else:
+        m2 = re.search(r"(?:budget|bujet)\D{0,10}(\d+)", teks_lower)
+        if m2:
+            hasil["budget"] = int(m2.group(1))
+
+    return hasil
 
 
 # ================= SYSTEM PROMPT =================
