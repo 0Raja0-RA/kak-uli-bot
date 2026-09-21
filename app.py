@@ -5,6 +5,7 @@ Cara menjalankan (di terminal, BUKAN lewat "python app.py"):
     streamlit run app.py
 
 Pastikan file ini, kak_uli_core.py, dan surabaya_cafes.json ada di folder yang sama.
+Tema tampilan (warna, font) diatur di .streamlit/config.toml.
 """
 
 import os
@@ -12,12 +13,102 @@ import streamlit as st
 
 import kak_uli_core as core
 
-st.set_page_config(page_title="Kak Uli - Cafe Surabaya", page_icon="☕", layout="wide")
+st.set_page_config(page_title="Kak Uli - Cafe Surabaya", page_icon="🤖", layout="centered")
+
+# ================= CSS TAMBAHAN (font + sedikit polesan visual) =================
+# Mengubah tema menjadi lebih mirip dengan referensi gambar (Biru & Modern)
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* --- Latar Belakang Aplikasi --- */
+    .stApp {
+        background-color: #F0F4F8; /* Abu-abu kebiruan terang */
+    }
+    
+    /* --- Sidebar --- */
+    [data-testid="stSidebar"] {
+        background-color: #FFFFFF;
+    }
+
+    /* --- Tombol Standar (Warna Biru) --- */
+    .stButton > button, .stDownloadButton > button {
+        background-color: #2563EB; /* Biru */
+        color: #FFFFFF;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.2s;
+    }
+    .stButton > button:hover, .stDownloadButton > button:hover {
+        background-color: #1D4ED8;
+        color: #FFFFFF;
+        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    }
+
+    /* --- Accent Color (Radio, Toggle) --- */
+    [data-testid="stRadio"] label[data-baseweb="radio"] input:checked + div > div,
+    input[type="radio"], input[type="checkbox"] {
+        accent-color: #2563EB;
+    }
+
+    /* --- Card Container Chat Utama --- */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        border: none !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    /* --- Style Input Chat --- */
+    div[data-testid="stChatInput"] {
+        padding: 1rem;
+        background-color: transparent;
+    }
+    div[data-testid="stChatInput"] textarea {
+        border-radius: 24px;
+        border: 1px solid #E2E8F0;
+        padding-left: 1rem;
+    }
+    div[data-testid="stChatInput"] textarea:focus {
+        border-color: #2563EB;
+        box-shadow: 0 0 0 1px #2563EB;
+    }
+    
+    /* --- Tombol Send di Chat Input --- */
+    div[data-testid="stChatInput"] button {
+        background-color: #2563EB !important;
+        color: white !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        margin-right: 8px;
+        transition: transform 0.2s;
+    }
+    div[data-testid="stChatInput"] button:hover {
+        background-color: #1D4ED8 !important;
+        transform: scale(1.05);
+    }
+    div[data-testid="stChatInput"] button svg {
+        fill: white !important;
+        color: white !important;
+    }
+
+    /* Mengatur jarak konten agar rapi dengan header biru buatan */
+    .stChatMessage {
+        padding: 0 1.5rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ================= INISIALISASI SESSION STATE =================
-# session_state dipakai karena Streamlit menjalankan ulang seluruh script
-# tiap ada interaksi (klik tombol, ketik chat, dll) — messages & state
-# harus disimpan di sini supaya tidak balik ke kosong tiap re-run.
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -110,7 +201,7 @@ with st.sidebar:
     gacha_clicked = col1.button("🎲 Terserah", use_container_width=True)
     rangkum_clicked = col2.button("📝 Rangkum", use_container_width=True)
 
-    if st.button("🧹 Hapus riwayat sesi ini", use_container_width=True):
+    if st.button("🗑️ Hapus riwayat sesi ini", use_container_width=True):
         st.session_state.messages = []
         st.rerun()
 
@@ -146,50 +237,67 @@ with st.sidebar:
 
 # ================= AREA CHAT UTAMA =================
 
-st.title("☕ Kak Uli")
-st.caption("Senior kampus yang bantu kamu cari cafe nugas-able & worth it di Surabaya.")
+status_online = st.session_state.client is not None
+status_color = "#4ADE80" if status_online else "#9CA3AF"  # Hijau terang (Online) atau Abu-abu (Offline)
+status_text = "Online" if status_online else "Menunggu API key"
 
-if st.session_state.client is None:
-    st.info("Masukkan **GROQ_API_KEY** di sidebar dulu ya buat mulai ngobrol sama Kak Uli.")
-    st.stop()
+with st.container(border=True, height=620):
+    # Header biru kustom dengan margin negatif agar menempel di ujung container Streamlit
+    header_html = f"""
+    <div style="background-color: #2563EB; color: white; padding: 20px; border-radius: 14px 14px 0 0; display: flex; align-items: center; gap: 16px; margin: -1rem -1rem 1.5rem -1rem;">
+        <div style="background-color: rgba(255,255,255,0.2); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+            🤖
+        </div>
+        <div>
+            <div style="font-weight: 600; font-size: 1.2rem; margin-bottom: 2px;">Kak Uli</div>
+            <div style="font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                <span style="display: inline-block; width: 8px; height: 8px; background-color: {status_color}; border-radius: 50%;"></span>
+                {status_text}
+            </div>
+        </div>
+    </div>
+    """
+    st.markdown(header_html, unsafe_allow_html=True)
 
-# Tampilkan riwayat chat yang sudah ada
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
+    if not status_online:
+        st.info("Masukkan **GROQ_API_KEY** di sidebar dulu ya buat mulai ngobrol sama Kak Uli.")
+        st.stop()
 
-# Handle klik tombol fitur tambahan di sidebar
-if gacha_clicked:
-    pilihan = core.fitur_terserah(st.session_state.cafe_data, st.session_state.state)
-    if pilihan:
-        prompt_tersembunyi = (
-            f"Aku bingung mau kemana, tolong pilihkan satu tempat buat aku: {pilihan['name']}. "
-            "Jelaskan kenapa tempat ini asik buat dicoba."
-        )
-        proses_dan_tampilkan(prompt_tersembunyi)
-    else:
-        st.warning("Dataset cafe kosong, Kak Uli nggak bisa gacha nih.")
+    # Tampilkan riwayat chat yang sudah ada
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
-if rangkum_clicked:
-    hasil_rangkum = core.fitur_rangkum(st.session_state.messages, st.session_state.cafe_data)
-    if hasil_rangkum:
-        st.success(f"{len(hasil_rangkum)} tempat berhasil dirangkum: {', '.join(hasil_rangkum)}")
-        with open(core.FILE_RANGKUMAN, "rb") as f:
-            st.download_button("⬇️ Download daftar_nongkrong.txt", data=f, file_name=core.FILE_RANGKUMAN)
-    else:
-        st.info("Belum ada cafe spesifik yang kebahas nih, ngobrol dulu yuk!")
+    # Handle klik tombol fitur tambahan di sidebar
+    if gacha_clicked:
+        pilihan = core.fitur_terserah(st.session_state.cafe_data, st.session_state.state)
+        if pilihan:
+            prompt_tersembunyi = (
+                f"Aku bingung mau kemana, tolong pilihkan satu tempat buat aku: {pilihan['name']}. "
+                "Jelaskan kenapa tempat ini asik buat dicoba."
+            )
+            proses_dan_tampilkan(prompt_tersembunyi)
+        else:
+            st.warning("Dataset cafe kosong, Kak Uli nggak bisa gacha nih.")
 
-# Input chat utama
-prompt = st.chat_input("Tanya Kak Uli soal tempat nongkrong...")
-if prompt:
-    # Deteksi otomatis area/budget/begadang dari kalimat yang diketik,
-    # supaya tidak wajib isi kolom sidebar dulu untuk hal ini.
-    deteksi = core.ekstrak_preferensi_dari_teks(prompt, st.session_state.cafe_data)
-    if "area" in deteksi:
-        st.session_state.state["area"] = deteksi["area"]
-    if "budget" in deteksi:
-        st.session_state.state["budget"] = deteksi["budget"]
-    if "mode_24jam" in deteksi:
-        st.session_state.state["mode_24jam"] = deteksi["mode_24jam"]
+    if rangkum_clicked:
+        hasil_rangkum = core.fitur_rangkum(st.session_state.messages, st.session_state.cafe_data)
+        if hasil_rangkum:
+            st.success(f"{len(hasil_rangkum)} tempat berhasil dirangkum: {', '.join(hasil_rangkum)}")
+            with open(core.FILE_RANGKUMAN, "rb") as f:
+                st.download_button("⬇️ Download daftar_nongkrong.txt", data=f, file_name=core.FILE_RANGKUMAN)
+        else:
+            st.info("Belum ada cafe spesifik yang kebahas nih, ngobrol dulu yuk!")
 
-    proses_dan_tampilkan(prompt)
+    # Input chat utama
+    prompt = st.chat_input("Type your message...")
+    if prompt:
+        deteksi = core.ekstrak_preferensi_dari_teks(prompt, st.session_state.cafe_data)
+        if "area" in deteksi:
+            st.session_state.state["area"] = deteksi["area"]
+        if "budget" in deteksi:
+            st.session_state.state["budget"] = deteksi["budget"]
+        if "mode_24jam" in deteksi:
+            st.session_state.state["mode_24jam"] = deteksi["mode_24jam"]
+
+        proses_dan_tampilkan(prompt)

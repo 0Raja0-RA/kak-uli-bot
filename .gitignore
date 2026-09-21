@@ -12,8 +12,8 @@ __pycache__
 # Notebook checkpoint files
 .ipynb_checkpoints
 
-# Streamlit (jika nanti ada cache)
-.streamlit/
+# Streamlit — config.toml (tema) boleh masuk repo, bukan data sensitif
+# .streamlit/
 
 # OS generated files
 .DS_Store
