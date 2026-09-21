@@ -12,7 +12,7 @@ import streamlit as st
 
 import kak_uli_core as core
 
-st.set_page_config(page_title="Kak Uli - Cafe & Kuliner Surabaya", page_icon="☕", layout="wide")
+st.set_page_config(page_title="Kak Uli - Cafe Surabaya", page_icon="☕", layout="wide")
 
 # ================= INISIALISASI SESSION STATE =================
 # session_state dipakai karena Streamlit menjalankan ulang seluruh script
@@ -147,7 +147,7 @@ with st.sidebar:
 # ================= AREA CHAT UTAMA =================
 
 st.title("☕ Kak Uli")
-st.caption("Senior kampus yang bantu kamu cari cafe nugas-able & tempat makan worth it di Surabaya.")
+st.caption("Senior kampus yang bantu kamu cari cafe nugas-able & worth it di Surabaya.")
 
 if st.session_state.client is None:
     st.info("Masukkan **GROQ_API_KEY** di sidebar dulu ya buat mulai ngobrol sama Kak Uli.")

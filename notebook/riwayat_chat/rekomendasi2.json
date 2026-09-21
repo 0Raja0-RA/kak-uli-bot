@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "Aku raja seorang mahasiswa sains data terapan dari pens di surabaya timur"
+  },
+  {
+    "role": "assistant",
+    "content": "Halo bro! Salam kenal ya. Gue Kak Uli, siap bantu lo cari tempat ngopi yang asik buat nugas.\n\nTapi ya, karena lo dari Surabaya Timur, sementara data cafe yang gue punya sekarang ini **hanya untuk area Surabaya Barat**, jadi ada sedikit jaraknya.\n\nBiar gue bisa bantu lebih pas, boleh dong kasih tau dikit:\n1. **Budget lo berapa?** (Misal: di bawah 25rb, atau lebih santai?)\n2. **Lo mau cari yang di area mana sebenarnya?** Mau tetap di Surabaya Timur, atau mau gas ke Barat sekalian?\n3. **Butuh yang 24 jam nggak?** Atau cukup yang buka sampai malam?\n\nKasih tau aja, nanti gue cek lagi datanya biar nggak salah arah, bro! ☕📚"
+  },
+  {
+    "role": "user",
+    "content": "cariin cafe nyaman yang enak untuk begadang di surabaya"
+  },
+  {
+    "role": "assistant",
+    "content": "Oke bro, mode begadang aktif! 🌙\n\nKarena lo minta yang buat **begadang**, gue bakal filterin yang **buka 24 jam** doang ya.\n\nDari data yang gue punya, cuma ada **1 cafe** yang buka 24 jam:\n\n**1. Bang Ben'z Coffee Shop**\n*   **Area:** Surabaya Barat\n*   **Jam Buka:** Buka 24 jam ✅\n*   **Rating GMaps:** 5.0 (2 ulasan)\n*   **Harga:** Belum ada info di data\n*   **Link GMaps:** [Cek Lokasi di Sini](https://www.google.com/maps/place/Bang+Ben%27z+Coffee+Shop/data=!4m7!3m6!1s0x2dd7fd6717c5e669:0xe1433570816a916!8m2!3d-7.3280333!4d112.7009268!16s%2Fg%2F11s0tmqzhq!19sChIJaebFF2f91y0RFqkWCFczFA4)\n\n**Catatan penting buat lo:**\n*   Lokasinya di **Surabaya Barat**, jadi kalau lo dari Timur, siap-sip jarak jauh ya.\n*   Data fasilitas (colokan, wifi) belum tersedia di database gue. Jadi **wajib** cek dulu di Google Maps atau sosmed mereka, karena buat begadang colokan & wifi ngebut itu nyawa, bro. Jangan sampe nyampe sana colokan cuma 1 titik berlima orang.\n\nKalau lo mau cari yang lebih dekat di Surabaya Timur, sayangnya data cafe di area Timur belum masuk ke daftar gue saat ini. Mau gue bantu cari alternatif lain di Barat yang jam bukanya agak pagi (misal sampai jam 23.00) sebagai cadangan? Atau lo tetap gas ke Bang Ben'z?"
+  },
+  {
+    "role": "user",
+    "content": "Aku bingung mau kemana, tolong pilihkan satu tempat buat aku: Lyn'x Coffee Eatery. Jelaskan kenapa tempat ini asik buat dicoba."
+  },
+  {
+    "role": "assistant",
+    "content": "Waduh, bro. Gue harus jujur nih. 🙏\n\n**Lyn'x Coffee Eatery nggak ada di daftar data cafe yang tersedia di sistem gue.**\n\nSesuai aturan main gue: **JANGAN PERNAH merekomendasikan tempat yang tidak ada di DATA CAFE TERSEDIA.** Jadi, gue nggak bisa kasih detail harga, jam buka, atau ratingnya karena datanya kosong/bukan bagian dari dataset gue saat ini. Gue nggak mau ngarang-omongin tempat yang belum gue verifikasi datanya demi keamanan info lo.\n\nTapi, kalau lo memang penasaran sama Lyn'x, gue sarankan lo:\n1. Cek langsung profil mereka di **Google Maps** untuk lihat review terbaru, foto interior (cek colokan & vibe-nya), dan jam bukanya.\n2. Lihat sosmed mereka buat ngira-nira harga menu.\n\n---\n\n**Tapi kalau lo mau gue yang \"pilihkan satu\" dari data yang gue pegang (yang valid):**\n\nKarena tadi lo bilang mau **begadang** dan minta **pilihan satu tempat**, dari data gue yang aman:\n\n### **Pilihan Gue: Bang Ben'z Coffee Shop**\n\n**Kenapa gue pilih ini buat lo?**\n1. **Satu-satunya yang 24 Jam:** Dari 5 cafe di data gue, cuma Bang Ben'z yang bisa lo tempuh buat begadang tanpa takut diusir pas jam 2 pagi atau 4 pagi. Yang lain tutup jam 21.00 atau 22.00, itu nggak asik buat mahasiswa yang deadline mendadak.\n2. **Rating Sempurna (5.0):** Wiew Review sependapat, nggak ada keluhan besar.\n3. **Area Surabaya Barat:** Tetap cukup dekat kalau lo mau \"menjauh\" dari keramaian kampus buat fokus.\n\n**Link:** [Bang Ben'z Coffee Shop](https://www.google.com/maps/place/Bang+Ben%27z+Coffee+Shop/data=!4m7!3m6!1s0x2dd7fd6717c5e669:0xe1433570816a916!8m2!3d-7.3280333!4d112.7009268!16s%2Fg%2F11s0tmqzhq!19sChIJaebFF2f91y0RFqkWCFczFA4)\n\n⚠️ **Pengingat:** Cek dulu ya di GMaps/medsos, siapa tau jam buka atau harganya udah berubah. Dan jangan lupa bawa charger, bro!"
+  },
+  {
+    "role": "user",
+    "content": "cafe lain yang agak mahal dikit bro"
+  },
+  {
+    "role": "assistant",
+    "content": "Bro, gue harus jujur lagi nih. Di data cafe yang tersedia buat gue saat ini, **kolom \"Harga\" semua kosong**. Jadi, gue nggak bisa kasih rekomendasi spesifik mana yang \"agak mahal dikit\" karena gue nggak punya angka harga permenunya.\n\nKalau gue asal tebak, itu melanggar aturan gue (nggak boleh ngarang data).\n\n**Saran gue biar lo nggak buang waktu:**\nKarena lo mau yang **sedikit lebih premium/mahal**, biasanya cafe yang sekelas *Eatery* atau punya branding lebih kuat harganya mulai dari 30rb-50rb++ per menu. Tapi di data gue, info harga-nya belum terinput.\n\n**Opsi realistis dari data gue:**\nKalau lo tetap mau pakai data gue, gue nggak bisa filter berdasarkan harga. Tapi kalau lo mau gue bantu cek **cafe lain yang buka lebih lama** (walau bukan 24 jam) sebagai alternatif kalau lo nggak mau begadang sampe subuh:\n\n1. **55 Coffee**\n   - Jam: Tutup pukul 22.00\n   - Rating: 5.0\n   - Link: [Cek di Sini](https://www.google.com/maps/place/55+Coffee/data=!4m7!3m6!1s0x2dd7fd0041babd85:0xc6791a1eea3aa67e!8m2!3d-7.2777125!4d112.6974515!16s%2Fg%2F11ntt1m763!19sChIJhb26QQD91y0RfqY66h4aecY)\n\n2. **Angkringan Warekono**\n   - Jam: Tutup pukul 21.00\n   - Rating: 5.0\n   - Link: [Cek di Sini](https://www.google.com/maps/place/Angkringan+Warekono+karangpilang,+Surabaya/data=!4m7!3m6!1s0x2dd7fd1518a4aab5:0x2c7ab1817ab104db!8m2!3d-7.346283!4d112.6849573!16s%2Fg%2F11l5fk48z8!19sChIJtaqkGBX91y0R2wSxeoGxeiw)\n   - *Note: Ini angkringan, vibes-nya biasanya lebih santai dan mungkin harganya lebih murah, tapi jam tutupnya cepet.*\n\n**Bottom line:**\nGue nggak bisa"
+  }
+]
